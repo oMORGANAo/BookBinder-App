@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="828073ff-a7dd-459c-b8ad-3e26734047ec" name="BeanBooks" url="http://a22web46.studev.groept.be">
+        <fileTransfer rootFolder="/var/www/html" accessType="SFTP" host="shell.studev.groept.be" port="22" sshConfigId="849372cd-16b8-4d30-80b6-38251d524990" sshConfig="a22web46@shell.studev.groept.be:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

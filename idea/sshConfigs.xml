@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="shell.studev.groept.be" id="849372cd-16b8-4d30-80b6-38251d524990" port="22" nameFormat="DESCRIPTIVE" username="a22web46" useOpenSSHConfig="true" />
+    </configs>
+  </component>
+</project>

@@ -1,0 +1,133 @@
+.login-container, .signup-container {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 350px;
+    margin: 100px auto;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333333;
+    font-weight: 700;
+}
+
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333333;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.signup-text {
+    font-size: 15px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.forgot-password-text{
+    margin-bottom: 10px;
+}
+
+.signup-link, .forgot-password-link {
+    color: #333333;
+    text-decoration: none;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}
+
+.forgot-password-link:hover {
+    text-decoration: underline;
+}
+
+button[type="submit"]:hover {
+    background-color: #555;
+}
+
+button[type="submit"]:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.error-message {
+    color: #FF0000;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid #FF0000;
+    background-color: #FFECEC;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.error-message-client {
+    display: none;
+    color: #d9534f;
+    font-size: 0.8rem;
+    margin-top: 4px;
+    margin-bottom: 8px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .login-container {
+        width: 90%;
+        margin: 50px auto;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    .form-group {
+        max-width: 100%;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"] {
+        font-size: 14px;
+    }
+
+    button[type="submit"] {
+        font-size: 14px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .logo img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .logo {
+        padding: 10px;
+    }
+}

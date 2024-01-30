@@ -1,0 +1,18 @@
+.container h1 {
+    font-size: 2.5em;
+    color: #D2042D;
+    margin-bottom: 20px;
+}
+
+.container p {
+    line-height: 1.6;
+}
+
+.try-again-link{
+    color: #333333;
+    text-decoration: none;
+}
+
+.try-again-link:hover{
+    text-decoration: underline;
+}

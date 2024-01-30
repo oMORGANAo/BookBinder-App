@@ -1,0 +1,181 @@
+body {
+    background-color: #fef7ea;
+}
+
+.profile-section {
+    padding: 30px;
+}
+
+.profile-title {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    display: flex;
+    margin-left: 40px;
+}
+
+.profile-content {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.profile-image-container {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin-left: 40px;
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 2px solid #000000;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08), 0 0 0 4px rgba(0, 0, 0, 0.04);
+    border-radius: 16px;
+}
+
+.profile-info {
+    margin-left: 30px;
+    margin-bottom: 120px;
+}
+
+.profile-settings{
+    margin-top: 5px;
+}
+
+.profile-name {
+    font-family: 'Kalam', cursive;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+}
+
+.profile-zip-code, .profile-birthdate {
+    font-family: 'Kalam', cursive;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.favorite-books-section {
+    padding: 30px;
+}
+
+.favorite-books-title {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    display: flex;
+    align-items: center;
+    margin-left: 40px;
+}
+
+.bean-icon {
+    margin-left: 10px;
+}
+
+.favorite-books-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.book-card {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 2px solid #000000;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    padding: 15px;
+    position: relative;
+    width: calc((100% - 90px) / 3);
+}
+
+.book-cover {
+    width: 120px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+.book-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: 'Kalam', cursive;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.book-title {
+    font-size: 20px;
+    max-width: 260px;
+    word-wrap: break-word;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.book-top-image {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    width: 100px;
+    height: 100px;
+}
+
+.book-genre {
+    max-width: 260px;
+    word-wrap: break-word;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+@media (max-width: 1024px) {
+    .favorite-books-container {
+        flex-wrap: wrap;
+    }
+
+    .book-card {
+        width: calc((100% - 60px) / 2);
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 1500px) {
+    .profile-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-image-container {
+        margin-bottom: 20px;
+    }
+
+    .profile-info {
+        margin-left: 0;
+        margin-bottom: 40px;
+    }
+
+    .favorite-books-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .book-card {
+        width: 100%;
+    }
+}

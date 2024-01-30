@@ -1,0 +1,220 @@
+header, footer{
+    display:none;
+}
+body{
+    background-color:#FEF7EA;
+}
+header h1,h3{
+    font-family: 'Inter', sans-serif;
+    padding: 0px;
+    margin: 0px;
+}
+
+#Title{
+    font-family: 'Inter', sans-serif;
+    font-size: 50px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    align-items: center;
+}
+
+
+main{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: black;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 100%;
+    margin: 10px;
+}
+
+
+article{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width:100%;
+    margin: 0px;
+}
+ul{
+    padding: 0px;
+}
+.line {
+    border-bottom: 1px solid black;
+    width: 100%;
+    justify-content: center;
+}
+.OneBook{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 0px;
+    padding-bottom: 15px;
+    height: fit-content;
+    width: auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.OneBook a.bookButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding:10px;
+    height: fit-content;
+    width: 500px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    border-radius: 8px;
+    background-color: unset;
+}
+.OneBook a.bookButton:hover {
+    transition: background-color 0.3s ease;
+    background-color:unset;
+    color: black;
+    border: solid 2px #461b27;
+}
+.bookImage{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    height: 220px;
+    width: fit-content;
+    align-items: center;
+}
+img{
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.textAdapt{
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-left: 10px;
+    font-size: 20px;
+    width: 40%;
+    height: 220px;
+    justify-content: space-between;
+}
+.textAdapt h3{
+    font-size: .80em;
+}
+.textAdapt p{
+    font-size: .70em;
+}
+.bottom-elements{
+    display: flex;
+    flex-direction: column;
+    height: 80px;
+    justify-content: space-between;
+    padding-bottom: 15px;
+}
+
+.ratingSystem{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin:0;
+    height: auto;
+    width: 30%;
+    align-items: center;
+}
+.rating{
+    width: fit-content;
+}
+.beanz{
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+}
+
+button{
+    background: none;
+    cursor: pointer;
+}
+button:hover{
+    cursor: pointer;
+}
+.BeanButton{
+    display: flex;
+    width: auto;
+    height:auto;
+    justify-content: start;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    background-color: inherit;
+}
+
+aside {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 30%;
+    font-family: 'Inter', sans-serif;
+    justify-content: center;
+
+}
+.recomBook{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: 11%;
+    width: auto;
+    padding-bottom: 10px;
+}
+.textAdaptRecom{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    font-size: 15px;
+    margin-left: 5px;
+
+}
+
+#feedback_article{
+    /*border: solid 2px orange;*/
+    display: flex;
+    flex-direction: column;
+}
+#author{
+    width: 50%;
+}
+#feedback{
+    height: 100px;
+    width: 300px;
+
+}
+@media screen and (max-width: 640px) {
+    .imageOfBook{
+        width: 200px;
+        height: 300px;
+    }
+    .ratingSystem {
+        flex-direction: column;
+    }
+
+    .OneBook a.bookButton {
+        width: auto;
+    }
+    .tab-button{
+        width: 90%;
+    }
+}
+@media (max-width: 500px) {
+    .imageOfBook{
+        width: 130px;
+        height: 200px;
+    }
+}

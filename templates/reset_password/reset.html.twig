@@ -1,0 +1,20 @@
+{% extends 'base_security.html.twig' %}
+
+{% block reset_password %}
+
+    <div class="reset-password-container">
+        <h2>Reset your password</h2>
+        {{ form_start(resetForm, { 'attr': { 'id': 'resetForm' } }) }}
+            <div class="form-group">
+                {{ form_row(resetForm.plainPassword.first, { 'label': 'Password', 'attr': { 'class': 'form-control', 'id': 'password1', 'oninput': 'validatePassword(this, "password1Error");' } }) }}
+                <div id="password1Error" class="error-message-client" style="display: none;">Password should be at least 8 characters and include at least one uppercase letter, one lowercase letter, one number, and one special character.</div>
+            </div>
+            <div class="form-group">
+                {{ form_row(resetForm.plainPassword.second, { 'label': 'Reconfirm Password', 'attr': { 'class': 'form-control', 'id': 'password2', 'oninput': 'validatePasswordMatch();' } }) }}
+                <div id="password2Error" class="error-message-client" style="display: none;">The password fields must match</div>
+            </div>
+        <button type="submit" id="submitButton" disabled>Reset password</button>
+        {{ form_end(resetForm) }}
+    </div>
+
+{% endblock %}

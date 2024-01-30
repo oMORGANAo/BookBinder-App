@@ -1,0 +1,320 @@
+{% extends 'base.html.twig' %}
+
+{% block my_books %}
+    <article>
+        <ul>
+            <div>
+                <!-- Tab buttons -->
+                <button class="tab-button" onclick="openTab('beaned')">Beaned Books</button>
+                <button class="tab-button" onclick="openTab('planted')">Planted Books</button>
+                <button class="tab-button" onclick="openTab('finished')">Finished Books</button>
+            </div>
+
+            <!-- Tab content: Beaned -->
+            <div id="beaned" class="tab">
+                <h2>Beaned:</h2>
+                <ul>
+                    {% for myBook in beanedMyBooks %}
+                        <div class="OneBook">
+                            <a class="bookButton" href="{{ path('app_open_book', {'bookId': myBook.getBook().getId}) }}">
+                                <div class="bookImage">
+                                    <img class="ImageOfBook" src="{{ myBook.getBook().getImageUrlL() }}" alt="{{ asset('images/beansBook.svg')}}">
+                                </div>
+                                <div class="textAdapt">
+                                    <h3><b>{{ myBook.getBook().getTitle() }}</b></h3>
+                                    <h3>By {{ myBook.getBook().getAuthor }}</h3>
+                                        {% for bookGenre in myBook.getBook().getBookGenres() %}
+                                                <p><b>{{ bookGenre.getGenre().getGenre() }} </b></p>
+                                        {% endfor %}
+                                    <p><b>{{ myBook.getBook().getPages }} pages</b></p>
+                                </div>
+                            </a>
+                            <div class="ratingSystem">
+                                <div class="rating">
+                                    <form action="{{ path('app_open_my_books') }}" method="POST">
+                                        <input type="hidden" name="bookIdByGreenBean" value={{ myBook.getBook().getId() }}>
+                                        <button class="BeanButton" type = "submit">
+                                            {% if not myBook.getBeaned() == 1 %}
+                                                <div>
+                                                    <img class="beanz" src="{{ asset('images/bean_empty.svg')}}" alt="green button off">
+                                                </div>
+                                            {% else %}
+                                                <div>
+                                                    <img class="beanz" src="{{ asset('images/bean_green.svg')}}" alt="green button on">
+                                                </div>
+                                            {% endif %}
+                                        </button>
+                                    </form>
+                                    <div class="greenCounter">
+                                        <p><b>{{ myBook.getBook().getBeans() }}</b></p>
+                                    </div>
+                                </div>
+                                <div class="rating">
+                                    <form action="{{ path('app_open_my_books') }}" method="POST">
+                                        <input type="hidden" name="bookIdByRedBean" value={{ myBook.getBook().getId() }}>
+                                        <button class="BeanButton" id="bad{{ myBook.getBook().getId() }}">
+                                            {% if not myBook.getBadBeaned() == 1 %}
+                                                <div>
+                                                    <img class="beanz" src="{{ asset('images/bean-off.svg')}}" alt="red button off">
+                                                </div>
+                                            {% else %}
+                                                <div>
+                                                    <img class="beanz" src="{{ asset('images/bean_red.svg')}}" alt="red button on">
+                                                </div>
+                                            {% endif %}
+                                        </button>
+                                    </form>
+                                    <div class="redCounter">
+                                        <p><b>{{ myBook.getBook().getBadBeans() }}</b></p>
+                                    </div>
+                                </div>
+                                <div class="rating">
+                                    <form action="{{ path('app_open_my_books') }}" method="POST">
+                                        <input type="hidden" name="bookIdByPlant" value={{ myBook.getBook().getId() }}>
+                                        <button class="BeanButton" id="plant{{ myBook.getBook().getId() }}">
+                                            {% if not myBook.getPlanted() == 1 %}
+                                                <div>
+                                                    <img class="beanz" src="{{ asset('images/sprout.svg')}}" alt="plant button off">
+                                                </div>
+                                            {% else %}
+                                                <div>
+                                                    <img class="beanz" src="{{ asset('images/sprout_green.svg')}}" alt="plant button on">
+                                                </div>
+                                            {% endif %}
+                                        </button>
+                                    </form>
+                                    <div class="plantCounter">
+                                        <p><b>{{ myBook.getBook().getPlants() }}</b></p>
+                                    </div>
+                                </div>
+                                <div class="rating">
+                                    <form action="{{ path('app_open_my_books') }}" method="POST">
+                                        <input type="hidden" name="bookIdByFinished" value={{ myBook.getBook().getId() }}>
+                                        <button class="BeanButton" id="plant{{ myBook.getBook().getId() }}">
+                                            {% if not myBook.getfinished() == 1 %}
+                                                <div>
+                                                    <img class="beanz" src="{{ asset('images/book_open.svg')}}" alt="finished button off">
+                                                </div>
+                                            {% else %}
+                                                <div>
+                                                    <img class="beanz" src="{{ asset('images/book_open_check.svg')}}" alt="finished button on">
+                                                </div>
+                                            {% endif %}
+                                        </button>
+                                    </form>
+                                    <div class="finishedCounter">
+                                        <p><b>{{ myBook.getBook().getFinished() }}</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Tab content: Planted -->
+            <div id="planted" class="tab">
+                <h2>Planted:</h2>
+                <ul>
+                    {% for myBook in plantedMyBooks %}
+                        <div class="OneBook">
+                            <a class="bookButton" href="{{ path('app_open_book', {'bookId': myBook.getBook().getId}) }}">
+                                <div class="bookImage">
+                                    <img class="ImageOfBook" src="{{ myBook.getBook().getImageUrlL() }}" alt="{{ asset('images/beansBook.svg')}}">
+                                </div>
+                                <div class="textAdapt">
+                                    <h3><b>{{ myBook.getBook().getTitle() }}</b></h3>
+                                    <h3>By {{ myBook.getBook().getAuthor }}</h3>
+                                    {% for bookGenre in myBook.getBook().getBookGenres() %}
+                                        <p><b>{{ bookGenre.getGenre().getGenre() }} </b></p>
+                                    {% endfor %}
+                                    <p><b>{{ myBook.getBook().getPages }} pages</b></p>
+                                </div>
+                            </a>
+                            <div class="ratingSystem">
+                                <div class="rating">
+                                    <form action="{{ path('app_open_my_books') }}" method="POST">
+                                        <input type="hidden" name="bookIdByGreenBean" value={{ myBook.getBook().getId() }}>
+                                        <button class="BeanButton" type = "submit">
+                                            {% if not myBook.getBeaned() == 1 %}
+                                                <div>
+                                                    <img class="beanz" src="{{ asset('images/bean_empty.svg')}}" alt="green button off">
+                                                </div>
+                                            {% else %}
+                                                <div>
+                                                    <img class="beanz" src="{{ asset('images/bean_green.svg')}}" alt="green button on">
+                                                </div>
+                                            {% endif %}
+                                        </button>
+                                    </form>
+                                    <div class="greenCounter">
+                                        <p><b>{{ myBook.getBook().getBeans() }}</b></p>
+                                    </div>
+                                </div>
+                                <div class="rating">
+                                    <form action="{{ path('app_open_my_books') }}" method="POST">
+                                        <input type="hidden" name="bookIdByRedBean" value={{ myBook.getBook().getId() }}>
+                                        <button class="BeanButton" id="bad{{ myBook.getBook().getId() }}">
+                                            {% if not myBook.getBadBeaned() == 1 %}
+                                                <div>
+                                                    <img class="beanz" src="{{ asset('images/bean-off.svg')}}" alt="red button off">
+                                                </div>
+                                            {% else %}
+                                                <div>
+                                                    <img class="beanz" src="{{ asset('images/bean_red.svg')}}" alt="red button on">
+                                                </div>
+                                            {% endif %}
+                                        </button>
+                                    </form>
+                                    <div class="redCounter">
+                                        <p><b>{{ myBook.getBook().getBadBeans() }}</b></p>
+                                    </div>
+                                </div>
+                                <div class="rating">
+                                    <form action="{{ path('app_open_my_books') }}" method="POST">
+                                        <input type="hidden" name="bookIdByPlant" value={{ myBook.getBook().getId() }}>
+                                        <button class="BeanButton" id="plant{{ myBook.getBook().getId() }}">
+                                            {% if not myBook.getPlanted() == 1 %}
+                                                <div>
+                                                    <img class="beanz" src="{{ asset('images/sprout.svg')}}" alt="plant button off">
+                                                </div>
+                                            {% else %}
+                                                <div>
+                                                    <img class="beanz" src="{{ asset('images/sprout_green.svg')}}" alt="plant button on">
+                                                </div>
+                                            {% endif %}
+                                        </button>
+                                    </form>
+                                    <div class="plantCounter">
+                                        <p><b>{{ myBook.getBook().getPlants() }}</b></p>
+                                    </div>
+                                </div>
+                                <div class="rating">
+                                    <form action="{{ path('app_open_my_books') }}" method="POST">
+                                        <input type="hidden" name="bookIdByFinished" value={{ myBook.getBook().getId() }}>
+                                        <button class="BeanButton" id="plant{{ myBook.getBook().getId() }}">
+                                            {% if not myBook.getfinished() == 1 %}
+                                                <div>
+                                                    <img class="beanz" src="{{ asset('images/book_open.svg')}}" alt="finished button off">
+                                                </div>
+                                            {% else %}
+                                                <div>
+                                                    <img class="beanz" src="{{ asset('images/book_open_check.svg')}}" alt="finished button on">
+                                                </div>
+                                            {% endif %}
+                                        </button>
+                                    </form>
+                                    <div class="finishedCounter">
+                                        <p><b>{{ myBook.getBook().getFinished() }}</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Tab content: Finished -->
+            <div id="finished" class="tab">
+                <h2>Finished:</h2>
+                <ul>
+                    {% for myBook in finishedMyBooks %}
+                        <div class="OneBook">
+                            <a class="bookButton" href="{{ path('app_open_book', {'bookId': myBook.getBook().getId}) }}">
+                                <div class="bookImage">
+                                    <img class="ImageOfBook" src="{{ myBook.getBook().getImageUrlL() }}" alt="{{ asset('images/beansBook.svg')}}">
+                                </div>
+                                <div class="textAdapt">
+                                    <h3><b>{{ myBook.getBook().getTitle() }}</b></h3>
+                                    <h3>By {{ myBook.getBook().getAuthor }}</h3>
+                                    {% for bookGenre in myBook.getBook().getBookGenres() %}
+                                        <p><b>{{ bookGenre.getGenre().getGenre() }} </b></p>
+                                    {% endfor %}
+                                    <p><b>{{ myBook.getBook().getPages }} pages</b></p>
+                                </div>
+                            </a>
+                            <div class="ratingSystem">
+                                <div class="rating">
+                                    <form action="{{ path('app_open_my_books') }}" method="POST">
+                                        <input type="hidden" name="bookIdByGreenBean" value={{ myBook.getBook().getId() }}>
+                                        <button class="BeanButton" type = "submit">
+                                            {% if not myBook.getBeaned() == 1 %}
+                                                <div>
+                                                    <img class="beanz" src="{{ asset('images/bean_empty.svg')}}" alt="green button off">
+                                                </div>
+                                            {% else %}
+                                                <div>
+                                                    <img class="beanz" src="{{ asset('images/bean_green.svg')}}" alt="green button on">
+                                                </div>
+                                            {% endif %}
+                                        </button>
+                                    </form>
+                                    <div class="greenCounter">
+                                        <p><b>{{ myBook.getBook().getBeans() }}</b></p>
+                                    </div>
+                                </div>
+                                <div class="rating">
+                                    <form action="{{ path('app_open_my_books') }}" method="POST">
+                                        <input type="hidden" name="bookIdByRedBean" value={{ myBook.getBook().getId() }}>
+                                        <button class="BeanButton" id="bad{{ myBook.getBook().getId() }}">
+                                            {% if not myBook.getBadBeaned() == 1 %}
+                                                <div>
+                                                    <img class="beanz" src="{{ asset('images/bean-off.svg')}}" alt="red button off">
+                                                </div>
+                                            {% else %}
+                                                <div>
+                                                    <img class="beanz" src="{{ asset('images/bean_red.svg')}}" alt="red button on">
+                                                </div>
+                                            {% endif %}
+                                        </button>
+                                    </form>
+                                    <div class="redCounter">
+                                        <p><b>{{ myBook.getBook().getBadBeans() }}</b></p>
+                                    </div>
+                                </div>
+                                <div class="rating">
+                                    <form action="{{ path('app_open_my_books') }}" method="POST">
+                                        <input type="hidden" name="bookIdByPlant" value={{ myBook.getBook().getId() }}>
+                                        <button class="BeanButton" id="plant{{ myBook.getBook().getId() }}">
+                                            {% if not myBook.getPlanted() == 1 %}
+                                                <div>
+                                                    <img class="beanz" src="{{ asset('images/sprout.svg')}}" alt="plant button off">
+                                                </div>
+                                            {% else %}
+                                                <div>
+                                                    <img class="beanz" src="{{ asset('images/sprout_green.svg')}}" alt="plant button on">
+                                                </div>
+                                            {% endif %}
+                                        </button>
+                                    </form>
+                                    <div class="plantCounter">
+                                        <p><b>{{ myBook.getBook().getPlants() }}</b></p>
+                                    </div>
+                                </div>
+                                <div class="rating">
+                                    <form action="{{ path('app_open_my_books') }}" method="POST">
+                                        <input type="hidden" name="bookIdByFinished" value={{ myBook.getBook().getId() }}>
+                                        <button class="BeanButton" id="plant{{ myBook.getBook().getId() }}">
+                                            {% if not myBook.getfinished() == 1 %}
+                                                <div>
+                                                    <img class="beanz" src="{{ asset('images/book_open.svg')}}" alt="finished button off">
+                                                </div>
+                                            {% else %}
+                                                <div>
+                                                    <img class="beanz" src="{{ asset('images/book_open_check.svg')}}" alt="finished button on">
+                                                </div>
+                                            {% endif %}
+                                        </button>
+                                    </form>
+                                    <div class="finishedCounter">
+                                        <p><b>{{ myBook.getBook().getFinished() }}</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </ul>
+            </div>
+        </ul>
+    </article>
+{% endblock %}

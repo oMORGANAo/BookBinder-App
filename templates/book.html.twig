@@ -1,0 +1,162 @@
+{% extends 'base.html.twig' %}
+{% block book %}
+    <!--
+    * This is the html file of the book page
+    * @author Kobe Vanhaeren
+    -->
+
+    <!-- Book description section -->
+    <section id="description">
+        <img src="{{ shownBook.getImageUrlL() }}" alt="{{ shownBook.getTitle() }}">
+        <div id="text-block">
+            <div>
+                <h1>{{ shownBook.getTitle() }}</h1>
+                <h2>Genre:
+                    {% for genre in genres %}
+                        {{ genre.getGenre() }}
+                    {% endfor %}
+                </h2>
+                <div id="summary">{{ shownBook.getDescription() }}</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Middle third of the page -->
+    <section id="rating">
+        <div>
+            <!-- Own review section -->
+            <section id="OwnReview">
+                <h1>Write your own review:</h1>
+                <form action="{{ path('app_open_book', {'bookId': shownBook.getId}) }}" method="post">
+                    <textarea id="review" name="review" placeholder=" Write your review here:&#10;  &bull;previous review will be overwritten&#10;  &bull;to delete your current review: submit an empty field"></textarea>
+                    <button type="submit">Submit</button>
+                </form>
+            </section>
+            <!-- Beanalytics section -->
+            <section id="Beanalytics">
+                <h1>Beanalytics:</h1>
+                <div id="veggies">
+                    <!-- Green bean section -->
+                    <div>
+                        <form action="{{ path('app_open_book', {'bookId': shownBook.getId}) }}" method="POST">
+                            <input type="hidden" name="bookIdByGreenBean" value="{{ shownBook.getId() }}">
+                            <a href="#" onclick="this.closest('form').submit()">
+                                {% if not myBookEntryOfShownBook.getBeaned() == 1 %}
+                                    <div>
+                                        <img src="{{ asset('images/bean_empty.svg') }}" alt="green button off">
+                                    </div>
+                                {% else %}
+                                    <div>
+                                        <img src="{{ asset('images/bean_green.svg') }}" alt="green button on">
+                                    </div>
+                                {% endif %}
+                            </a>
+                        </form>
+                        <div class="greenCounter">
+                            <p><b>{{ myBookEntryOfShownBook.getBook().getBeans() }}</b></p>
+                        </div>
+                    </div>
+                    <!-- Red bean section -->
+                    <div>
+                        <form action="{{ path('app_open_book', {'bookId': shownBook.getId}) }}" method="POST">
+                            <input type="hidden" name="bookIdByRedBean" value="{{ shownBook.getId() }}">
+                            <a href="#" onclick="this.closest('form').submit()">
+                                {% if not myBookEntryOfShownBook.getBadBeaned() == 1 %}
+                                    <div>
+                                        <img src="{{ asset('images/bean-off.svg') }}" alt="red button off">
+                                    </div>
+                                {% else %}
+                                    <div>
+                                        <img src="{{ asset('images/bean_red.svg') }}" alt="red button on">
+                                    </div>
+                                {% endif %}
+                            </a>
+                        </form>
+                        <div class="redCounter">
+                            <p><b>{{ myBookEntryOfShownBook.getBook().getBadBeans() }}</b></p>
+                        </div>
+                    </div>
+                    <!-- Plant section -->
+                    <div>
+                        <form action="{{ path('app_open_book', {'bookId': shownBook.getId}) }}" method="POST">
+                            <input type="hidden" name="bookIdByPlant" value="{{ shownBook.getId() }}">
+                            <a href="#" onclick="this.closest('form').submit()">
+                                {% if not myBookEntryOfShownBook.getPlanted() == 1 %}
+                                    <div>
+                                        <img src="{{ asset('images/sprout.svg') }}" alt="plant button off">
+                                    </div>
+                                {% else %}
+                                    <div>
+                                        <img src="{{ asset('images/sprout_green.svg') }}" alt="plant button on">
+                                    </div>
+                                {% endif %}
+                            </a>
+                        </form>
+                        <div class="plantCounter">
+                            <p><b>{{ myBookEntryOfShownBook.getBook().getPlants() }}</b></p>
+                        </div>
+                    </div>
+                    <!-- Finished section -->
+                    <div>
+                        <form action="{{ path('app_open_book', {'bookId': shownBook.getId}) }}" method="POST">
+                            <input type="hidden" name="bookIdByFinished" value="{{ shownBook.getId() }}">
+                            <a href="#" onclick="this.closest('form').submit()">
+                                {% if not myBookEntryOfShownBook.getfinished() == 1 %}
+                                    <div>
+                                        <img src="{{ asset('images/book_open.svg') }}" alt="finished button off">
+                                    </div>
+                                {% else %}
+                                    <div>
+                                        <img src="{{ asset('images/book_open_check.svg') }}" alt="finished button on">
+                                    </div>
+                                {% endif %}
+                            </a>
+                        </form>
+                        <div class="finishedCounter">
+                            <p><b>{{ myBookEntryOfShownBook.getBook().getFinished() }}</b></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- Reviews section -->
+        <aside id="reviews">
+            <h1>Reviews:</h1>
+            <ul>
+                {% for myBookEntry in myBookEntriesWithReview %}
+                    <li class="review-item">{{ myBookEntry.getReview() }}<br><br>   <b>- {{ myBookEntry.getUser().getFirstName() }} {{ myBookEntry.getUser().getSurname() }}</b></li>
+                {% endfor %}
+            </ul>
+        </aside>
+    </section>
+
+    <!-- Bottom third of the page -->
+    <section id="sameGenreBooks">
+        <h1>Other books with the same genre:</h1>
+        <div id="list">
+            {% for otherBook in otherBooks %}
+                <a rel="alternate" href="{{ path('app_open_book', {'bookId': otherBook.getId}) }}">
+                    <section>
+                        <img src="{{ otherBook.getImageUrlL() }}" alt="{{ otherBook.getTitle() }}">
+                        <div>
+                            <h1>{{ otherBook.getTitle() }}</h1>
+                            <section>
+                                genres: <br>
+                                {% for otherGenre in otherBook.getBookGenres() %}
+                                    <p>- {{ otherGenre.getGenre().getGenre() }}</p>
+                                {% endfor %}
+                                <br>
+                                <p>Author: {{ otherBook.getAuthor() }}</p>
+                                <p>pages: {{ otherBook.getPages() }}</p>
+                                <p>beans: {{ otherBook.getBeans() }}</p>
+                                <p>bad beans: {{ otherBook.getBadBeans() }}</p>
+                                <p>planted: {{ otherBook.getPlants() }}</p>
+                                <p>finished: {{ otherBook.getFinished() }}</p>
+                            </section>
+                        </div>
+                    </section>
+                </a>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

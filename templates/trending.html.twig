@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+
+{% block trending %}
+    <article>
+        <h1 id ="Title">Trending <img class="Trending" src="{{ asset('images/flame.svg')}}" alt= "" > </h1>
+        <ul>
+            {% for book in myBookEntriesOfTopBooks %}
+                <div class="OneBook">
+                    <a class="bookButton" href="{{ path('app_open_book', {'bookId': book.getBook().getId}) }}">
+                    <div class="bookImage">
+                        <img class="ImageOfBook" src="{{ book.getBook().getImageUrlL() }}"  alt="{{ asset('images/beansBook.svg')}}">
+                    </div>
+                    <div class="textAdapt">
+                        <div class="top-elements">
+                            <h3><b>{{ book.getBook().getTitle }}</b></h3>
+                            <p>     By {{ book.getBook().getAuthor }}</p>
+                        </div>
+                        <div class="bottom-elements">
+
+                            {% for bookGenre in book.getBook().getBookGenres() %}
+                                <p class= "bookGenre"><b>{{ bookGenre.getGenre().getGenre() }}</b></p>
+                            {% endfor %}
+                            <p><b>{{ book.getBook().getPages }} pages</b></p>
+                        </div>
+                    </div>
+                    </a>
+                    <div class="ratingSystem">
+                        <div class="rating">
+                            <form action="{{ path('app_trending_page') }}" method="POST">
+                                <input type="hidden" name="bookIdByGreenBean" value={{ book.getBook().getId() }}>
+                                <button class="BeanButton" type = "submit">
+                                    {% if not book.getBeaned() == 1 %}
+                                        <div>
+                                            <img class="beanz" src="{{ asset('images/bean_empty.svg')}}" alt="green button off">
+                                        </div>
+                                    {% else %}
+                                        <div>
+                                            <img class="beanz" src="{{ asset('images/bean_green.svg')}}" alt="green button on">
+                                        </div>
+                                    {% endif %}
+                                </button>
+                            </form>
+                            <div class="greenCounter">
+                                <p><b>{{ book.getBook().getBeans() }}</b></p>
+                            </div>
+                        </div>
+                        <div class="rating">
+                            <form action="{{ path('app_trending_page') }}" method="POST">
+                                <input type="hidden" name="bookIdByRedBean" value={{ book.getBook().getId() }}>
+                                <button class="BeanButton" id="bad{{ book.getId() }}">
+                                    {% if not book.getBadBeaned() == 1 %}
+                                        <div>
+                                            <img class="beanz" src="{{ asset('images/bean-off.svg')}}" alt="red button off">
+                                        </div>
+                                    {% else %}
+                                        <div>
+                                            <img class="beanz" src="{{ asset('images/bean_red.svg')}}" alt="red button on">
+                                        </div>
+                                    {% endif %}
+                                </button>
+                            </form>
+                            <div class="redCounter">
+                                <p><b>{{ book.getBook().getBadBeans() }}</b></p>
+                            </div>
+                        </div>
+                        <div class="rating">
+                            <form class="beanForm" action="{{ path('app_trending_page') }}" method="POST">
+                                <input type="hidden" name="bookIdByPlant" value={{ book.getBook().getId() }}>
+                                <button class="BeanButton" id="plant{{ book.getBook().getId() }}">
+                                    {% if not book.getPlanted() == 1 %}
+                                        <div>
+                                            <img class="beanz" src="{{ asset('images/sprout.svg')}}" alt="plant button off">
+                                        </div>
+                                    {% else %}
+                                        <div>
+                                            <img class="beanz" src="{{ asset('images/sprout_green.svg')}}" alt="plant button on">
+                                        </div>
+                                    {% endif %}
+                                </button>
+                            </form>
+                            <div class="plantCounter">
+                                <p><b>{{ book.getBook().getPlants() }}</b></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="line"></div>
+            {% endfor %}
+        </ul>
+    </article>
+    <script>
+        function checkImage(image) {
+            if (image.naturalWidth <= 10 || image.naturalHeight <= 10) {
+                image.style.display = 'none'; // Hides the invalid image
+                var fallbackImage = document.querySelector('.fallback-image');
+                fallbackImage.style.display = 'block'; // Shows the fallback image
+            }
+        }
+    </script>
+    </body>
+    </html>
+{% endblock %}

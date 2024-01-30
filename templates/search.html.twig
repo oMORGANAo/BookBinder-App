@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block search %}
+
+    <article>
+    <h1>Searched for {{ selected }}'s: {{ searched }} </h1>
+    <ul>
+        <div>
+            <ul>
+                {% for myBookEntry in searchResultMyBookEntriesOfUser %}
+                    <div class="OneBook">
+                        <a class="bookButton" href="{{ path('app_open_book', {'bookId': myBookEntry.getBook().getId}) }}">
+                            <div class="bookImage">
+                                <img class="ImageOfBook" src="{{ myBookEntry.getBook().getImageUrlL() }}" alt="{{ asset('images/beansBook.svg')}}">
+                            </div>
+                            <div class="textAdapt">
+                                <h3 class="bookTitle"><b>{{ myBookEntry.getBook().getTitle() }}</b></h3>
+                                <br/>
+                                <h3>By</h3><h3 class="bookAuthor"> {{ myBookEntry.getBook().getAuthor }}</h3>
+                                {% for bookGenre in myBookEntry.getBook().getBookGenres() %}
+                                    <p><b>{{ bookGenre.getGenre().getGenre() }} </b></p>
+                                {% endfor %}
+                                <p><b>{{ myBookEntry.getBook().getPages() }} pages</b></p>
+                            </div>
+                        </a>
+                        <div class="ratingSystem">
+                            <div class="rating">
+                                <form action="{{ path('app_open_search') }}" method="POST">
+                                    <input type="hidden" name="bookIdByGreenBean" value={{ myBookEntry.getBook().getId() }}>
+                                    <input type="hidden" name="searched" value="{{ searched }}">
+                                    <input type="hidden" name="selected" value="{{ selected }}">
+                                    <button class="BeanButton" type = "submit">
+                                        {% if not myBookEntry.getBeaned() == 1 %}
+                                            <div>
+                                                <img class="beanz" src="{{ asset('images/bean_empty.svg')}}" alt="green button off">
+                                            </div>
+                                        {% else %}
+                                            <div>
+                                                <img class="beanz" src="{{ asset('images/bean_green.svg')}}" alt="green button on">
+                                            </div>
+                                        {% endif %}
+                                    </button>
+                                </form>
+                                <div class="greenCounter">
+                                    <p><b>{{ myBookEntry.getBook().getBeans() }}</b></p>
+                                </div>
+                            </div>
+                            <div class="rating">
+                                <form action="{{ path('app_open_search') }}" method="POST">
+                                    <input type="hidden" name="bookIdByRedBean" value={{ myBookEntry.getBook().getId() }}>
+                                    <input type="hidden" name="searched" value="{{ searched }}">
+                                    <input type="hidden" name="selected" value="{{ selected }}">
+                                    <button class="BeanButton" id="bad{{ myBookEntry.getBook().id }}">
+                                        {% if not myBookEntry.getBadBeaned() == 1 %}
+                                            <div>
+                                                <img class="beanz" src="{{ asset('images/bean-off.svg')}}" alt="red button off">
+                                            </div>
+                                        {% else %}
+                                            <div>
+                                                <img class="beanz" src="{{ asset('images/bean_red.svg')}}" alt="red button on">
+                                            </div>
+                                        {% endif %}
+                                    </button>
+                                </form>
+                                <div class="redCounter">
+                                    <p><b>{{ myBookEntry.getBook().getBadBeans() }}</b></p>
+                                </div>
+                            </div>
+                            <div class="rating">
+                                <form action="{{ path('app_open_search') }}" method="POST">
+                                    <input type="hidden" name="bookIdByPlant" value={{ myBookEntry.getBook().getId() }}>
+                                    <input type="hidden" name="searched" value="{{ searched }}">
+                                    <input type="hidden" name="selected" value="{{ selected }}">
+                                    <button class="BeanButton" id="plant{{ myBookEntry.getBook().getId() }}">
+                                        {% if not myBookEntry.getPlanted() == 1 %}
+                                            <div>
+                                                <img class="beanz" src="{{ asset('images/sprout.svg')}}" alt="plant button off">
+                                            </div>
+                                        {% else %}
+                                            <div>
+                                                <img class="beanz" src="{{ asset('images/sprout_green.svg')}}" alt="plant button on">
+                                            </div>
+                                        {% endif %}
+                                    </button>
+                                </form>
+                                <div class="plantCounter">
+                                    <p><b>{{ myBookEntry.getBook().getPlants() }}</b></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </ul>
+        </div>
+    </ul>
+    </article>
+{% endblock %}

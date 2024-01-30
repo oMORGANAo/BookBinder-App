@@ -1,0 +1,9 @@
+{% extends 'base_security.html.twig' %}
+
+{% block confirmed_email %}
+    <div class="container">
+        <h2>Success!</h2>
+        <p>You have successfully confirmed your email address. Press button below to Log In</p>
+        <a href="{{ path('app_login') }}" class="login-button">Log In</a>
+    </div>
+{% endblock %}

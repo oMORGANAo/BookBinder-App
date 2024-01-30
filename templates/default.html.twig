@@ -1,0 +1,10 @@
+{% extends 'base_security.html.twig' %}
+
+{% block weclom_page %}
+    <div class="container">
+        <h2>Hello, User!</h2>
+        <p>Welcome to our WebSite. It is called BeanBooks and it's a great place to find books!
+            Press button below to Log In or Sign Up.</p>
+        <a href="{{ path('app_login') }}" class="login-button">Log In</a>
+    </div>
+{% endblock %}

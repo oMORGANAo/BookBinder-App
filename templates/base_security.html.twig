@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeanBooks</title>
+    <link href="{{ asset('css/header_security.css') }}" rel="stylesheet" type="text/css"/>
+    {% for stylesheet in stylesheets %}
+        <link href="{{ asset('css/' ~ stylesheet) }}" rel="stylesheet" type="text/css"/>
+    {% endfor %}
+    {% if javascripts is defined %}
+        {% for script in javascripts %}
+            <script src="{{ asset('js/' ~ script) }}" defer></script>
+        {% endfor %}
+    {% endif %}
+</head>
+<body>
+<header>
+    <div class="header-content">
+        <div class="logo">
+            <img src="{{ asset('images/bean.svg') }}" alt="Bean Icon" />
+            <h1>BeanBooks</h1>
+        </div>
+    </div>
+</header>
+<main>
+
+    {% block weclom_page %}
+    {% endblock %}
+
+    {% block login_page %}
+    {% endblock %}
+
+    {% block register_page %}
+    {% endblock %}
+
+    {% block confirm_email %}
+    {% endblock %}
+
+    {% block confirmed_email %}
+    {% endblock %}
+
+    {% block request %}
+    {% endblock %}
+
+    {% block password_reset_email %}
+    {% endblock %}
+
+    {% block reset_password %}
+    {% endblock %}
+
+    {% block reseted_password %}
+    {% endblock %}
+
+</main>
+</body>
+</html>

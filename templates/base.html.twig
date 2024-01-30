@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeanBooks</title>
+    <link href="{{ asset('css/header.css') }}" rel="stylesheet" type="text/css"/>
+    {% for stylesheet in stylesheets %}
+        <link href="{{ asset('css/' ~ stylesheet) }}" rel="stylesheet" type="text/css"/>
+    {% endfor %}
+    {% if javascripts is defined %}
+        {% for script in javascripts %}
+            <script src="{{ asset('js/' ~ script) }}" defer></script>
+        {% endfor %}
+    {% endif %}
+
+</head>
+<body>
+<header class="header">
+    <form action="{{ path('app_trending_page')}}">
+        <button type="submit" class="logo-button">
+            <div class="logo">
+                <h1 class="title">BeanBooks</h1>
+                <img class="bean" src="{{ asset('images/bean.svg') }}" alt="bean" />
+            </div>
+        </button>
+    </form>
+    <nav>
+        <div class="search-field">
+            <img class="search-icon" src="{{ asset('images/search_icon.svg') }}" alt="Search icon"/>
+            <form action="{{ path('app_open_search')}}" id="search-form" method="post">
+                <label>
+                    <input type="text" class="search-input" placeholder="Search Books" name="searched">
+                </label>
+                <select id="search-category" class="form-control-search" name="selected" >
+                    <option value="title">Title</option>
+                    <option value="isbn">ISBN</option>
+                    <option value="author">Author</option>
+                </select>
+            </form>
+        </div>
+        <a href="{{ path('app_open_my_books') }}">
+            <button class="nav-button">My Books</button>
+        </a>
+        <a href="{{ path('app_trending_page') }}">
+            <button class="nav-button">Trending</button>
+        </a>
+        <button class="nav-button"><a href="{{ path('app_profile') }}" class="my_profile">My Profile</a></button>
+        <button class="nav-button"><a href="{{ path('app_logout') }}" class="log_out-link">Log Out</a></button>
+    </nav>
+</header>
+<main>
+    {% block profile %}
+    {% endblock %}
+
+    {% block profile_settings%}
+    {% endblock %}
+
+    {% block my_books %}
+    {% endblock %}
+
+    {% block trending %}
+    {% endblock %}
+
+    {% block book %}
+    {% endblock %}
+
+    {% block search %}
+    {% endblock %}
+</main>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+{% extends 'base_security.html.twig' %}
+
+{% block request %}
+    <div class="reset-password-container">
+        <h2>Reset your password</h2>
+        {% for flash_error in app.flashes('reset_password_error') %}
+            <div class="alert" role="alert">{{ flash_error }}</div>
+        {% endfor %}
+        {{ form_start(requestForm, { 'attr': { 'id': 'requestForm' } }) }}
+            <div class="form-group">
+                {{ form_row(requestForm.email, { 'label': 'Email:', 'attr': { 'class': 'form-control', 'id': 'email', 'oninput': 'validateInput(this, /^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$/, "emailError");' }}) }}
+                <div id="emailError" class="error-message-client" style="display: none;">Please enter a valid email</div>
+            </div>
+            <p class="request-form-text">Enter your email address, and we will send you a
+                link to reset your password.</p>
+            <button type="submit" id="submitButton" disabled>Send password reset email</button>
+        {{ form_end(requestForm) }}
+    </div>
+
+{% endblock %}

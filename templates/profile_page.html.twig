@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block profile%}
+    <section class="profile-section">
+        <h2 class="profile-title">Profile</h2>
+        <div class="profile-content">
+            <div class="profile-image-container">
+                {% if app.user.profilePicture %}
+                    <img src="{{ asset('images/' ~ app.user.profilePicture.filename) }}" alt="Profile Picture" class="profile-image"/>
+                {% else %}
+                    <img src="{{ asset('images/blank-user.svg') }}" alt="Profile Picture" class="profile-image"/>
+                {% endif %}
+            </div>
+            <div class="profile-info">
+                <h3 class="profile-name">{{app.user.firstname()}} {{ app.user.surname() }}</h3>
+                <p class="profile-zip-code">Postal Code: {{ app.user.postalCode }}</p>
+                <p class="profile-birthdate">Birthdate: {{ app.user.birthdate|date('d/m/Y') }}</p>
+                <a href="{{ path('app_profile_settings') }}">
+                    <img src="{{ asset('images/pencil.svg') }}" alt="Edit Profile"  class="profile-settings" />
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="favorite-books-section">
+        <div class="favorite-books-title">
+            <h2>My bueno beans</h2>
+            <img src="{{ asset('images/black_bean.svg') }}" alt="Bean Icon" class="bean-icon" />
+        </div>
+        <div class="favorite-books-container">
+            {% set beanImages = ['golden_bean.svg', 'silver_bean.svg', 'bronze_bean.svg'] %}
+            {% for bookData in booksData %}
+                <a rel="alternate" href = "{{ path('app_open_book', {'bookId': bookData.id }) }}" class="book-card">
+                        <img src="{{ asset(bookData.image) }}" alt="Book Cover" class="book-cover" />
+                        <div class="book-info">
+                            <h4 class="book-title">{{ bookData.title }}</h4>
+                            <p class="book-genre"><span class="bold">Genre:</span> {{ bookData.genres|join(', ') }}</p>
+                            <p><span class="bold">Pages:</span> {{ bookData.pages }}</p>
+                            <p><span class="bold">Author:</span> {{ bookData.author }}</p>
+                        </div>
+                        <img src="{{ asset('images/' ~ beanImages[loop.index0]) }}" alt="Top Image" class="book-top-image" />
+                </a>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

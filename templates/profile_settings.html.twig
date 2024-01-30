@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block profile_settings%}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="change-user-data-container">
+        <h2>Update Your Data</h2>
+        {{ form_start(updateUserForm, { 'attr': { 'id': 'updateUserForm' } }) }}
+        <div class="form-group">
+            {{ form_row(updateUserForm.firstName, { 'label': 'First Name', 'attr': { 'class': 'form-control', 'id': 'firstName', 'onkeyup': 'validateInput(this, /^[A-Z][a-zA-Z]*$/, "firstNameError");' } }) }}
+            <div id="firstNameError" class="error-message-client" style="display: none;">First name should start with a capital letter and not contain digits</div>
+        </div>
+        <div class="form-group">
+            {{ form_row(updateUserForm.surname, { 'label': 'Surname', 'attr': { 'class': 'form-control', 'id': 'surname', 'onkeyup': 'validateInput(this, /^[A-Z][a-zA-Z]*$/, "surnameError");' } }) }}
+            <div id="surnameError" class="error-message-client" style="display: none;">Surname should start with a capital letter and not contain digits</div>
+        </div>
+        <div class="form-group">
+            {{ form_row(updateUserForm.postalCode, { 'label': 'Postal Code', 'attr': { 'class': 'form-control', 'id': 'postalCode', 'onkeyup': 'validateInput(this, /^[0-9]{4}$/, "postalCodeError");' } }) }}
+            <div id="postalCodeError" class="error-message-client" style="display: none;">Postal code should be exactly 4 digits and not contain letters</div>
+        </div>
+        <div class="form-group">
+            {{ form_row(updateUserForm.birthdate, { 'label': 'Birthdate', 'attr': { 'class': 'form-control', 'id': 'birthdate', 'onchange': 'validateInput(this, /.+/, "birthdateError");' } }) }}
+        </div>
+        <div class="form-group">
+            <label for="topOneBook">№ 1 Book</label>
+            <select id="topOneBook" name="topOneBook" class="form-control">
+                <option value="" selected>Leave unchanged, if you don't want change anything</option>
+                {% for book in beanedBooks %}
+                    <option value="{{ book.id }}">{{ book.title }}</option>
+                {% else %}
+                    <option>No books beaned yet</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="topTwoBook">№ 2 Book</label>
+            <select id="topTwoBook" name="topTwoBook" class="form-control">
+                <option value="" selected>Leave unchanged, if you don't want change anything</option>
+                {% for book in beanedBooks %}
+                    <option value="{{ book.id }}">{{ book.title }}</option>
+                {% else %}
+                    <option>No books beaned yet</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="topThreeBook">№ 3 Book</label>
+            <select id="topThreeBook" name="topThreeBook" class="form-control">
+                <option value="" selected>Leave unchanged, if you don't want change anything</option>
+                {% for book in beanedBooks %}
+                    <option value="{{ book.id }}">{{ book.title }}</option>
+                {% else %}
+                    <option>No books beaned yet</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            {{ form_row(updateUserForm.profilePicture, { 'label': 'Profile Picture', 'attr': { 'class': 'form-control' } }) }}
+        </div>
+        <button type="submit" id="submitButton" disabled>Update Data</button>
+        {{ form_end(updateUserForm) }}
+    </div>
+
+{% endblock %}
